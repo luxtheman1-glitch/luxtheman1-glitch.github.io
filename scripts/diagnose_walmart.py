@@ -18,30 +18,36 @@ def walk(x):
  elif isinstance(x,list):
   for v in x: yield from walk(v)
 
-def collect(x,names,out=None):
- if out is None: out={k:[] for k in names}
- if isinstance(x,dict):
-  for k,v in x.items():
-   if k in out and not isinstance(v,(dict,list)) and len(out[k])<8: out[k].append(v)
-   collect(v,names,out)
- elif isinstance(x,list):
-  for v in x: collect(v,names,out)
- return out
-
-names={'sellerName','sellerDisplayName','sellerTitle','availabilityStatus','availability','isOutOfStock','badge','badgeText','badgeLabel','isClearance','specialOffer','specialOfferText','currentPrice','wasPrice','price','canonicalUrl','productPageUrl','productUrl','imageUrl','thumbnailUrl','averageRating','numberOfReviews'}
-shown=0
+products=[]
 for root in roots:
  for d in walk(root):
-  if 'usItemId' not in d: continue
-  nm=d.get('name') or d.get('productName') or d.get('title')
-  if not isinstance(nm,str) or len(nm)<8: continue
-  print('\nITEM',d.get('usItemId'))
-  print('NAME',nm[:240])
-  print('DIRECT KEYS',sorted(d.keys()))
-  vals=collect(d,names)
-  for k,v in vals.items():
-   if v: print(k,repr(v[:8]))
-  print('SNIP',json.dumps(d,ensure_ascii=False)[:5000])
-  shown+=1
-  if shown>=6: raise SystemExit
-print('SHOWN',shown)
+  if d.get('__typename')=='Product' and d.get('usItemId') and isinstance(d.get('name'),str): products.append(d)
+print('REAL PRODUCT OBJECTS',len(products))
+
+hits=[]
+for d in products:
+ blob=json.dumps(d,ensure_ascii=False)
+ if 'clearance' in blob.lower(): hits.append(d)
+print('PRODUCT OBJECTS CONTAINING CLEARANCE',len(hits))
+for d in hits[:20]:
+ print('\nITEM',d.get('usItemId'))
+ print('NAME',d.get('name'))
+ print('SELLER',d.get('sellerName'),'OUT',d.get('isOutOfStock'),'AVAILV2',d.get('availabilityStatusV2'))
+ print('PRICE',d.get('price'),'PRICEINFO',json.dumps(d.get('priceInfo'),ensure_ascii=False)[:1200])
+ print('BADGE',json.dumps(d.get('badge'),ensure_ascii=False)[:1000])
+ print('BADGES',json.dumps(d.get('badges'),ensure_ascii=False)[:3500])
+ print('FLAG',json.dumps(d.get('flag'),ensure_ascii=False)[:1000])
+ print('SPECIALBUY',json.dumps(d.get('specialBuy'),ensure_ascii=False)[:1000])
+ print('PROMO',json.dumps(d.get('promoDiscount'),ensure_ascii=False)[:1000])
+ print('CANONICAL',d.get('canonicalUrl'))
+ print('IMAGEINFO',json.dumps(d.get('imageInfo'),ensure_ascii=False)[:1000])
+ # Print only paths/values that contain clearance so we can map exact marker.
+ found=[]
+ def paths(x,path=''):
+  if isinstance(x,dict):
+   for k,v in x.items(): paths(v,f'{path}.{k}' if path else k)
+  elif isinstance(x,list):
+   for i,v in enumerate(x): paths(v,f'{path}[{i}]')
+  elif 'clearance' in str(x).lower(): found.append((path,x))
+ paths(d)
+ print('CLEARANCE PATHS',found[:30])
