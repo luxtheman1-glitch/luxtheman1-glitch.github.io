@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d0d12">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LUX Clearance">
+<title>LUX//CLEARANCE — Mobile</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="top"><div class="head"><div class="logo">LUX<i>//</i>CLEARANCE</div><div class="search"><input id="q" placeholder="Search deals…"><button>⌕</button></div></div></div>
+<section class="hero"><div class="k">Tyler-first family clearance</div><h1>MEN FIRST.<br>DEALS EVERYWHERE.</h1><p>Your personal Walmart clearance feed. Men's clothing is weighted highest, then useful family, home, kitchen, kids, beauty, pet, tool and tech deals.</p><div class="stats"><div class="stat"><b id="total">0</b><span>deals</span></div><div class="stat"><b id="menN">0</b><span>men's</span></div><div class="stat"><b id="savedN">0</b><span>saved</span></div></div></section>
+<div class="scanbar"><div><b id="scanTitle">Ready</b><small id="scanText">Tap Scan to refresh the live Walmart clearance catalog. Men’s clearance runs first, then the rest of the clearance lanes.</small></div><button onclick="scanNow()">↻ Scan</button></div>
+<div class="chips" id="chips"></div>
+<div class="controls"><select id="max"><option value="99999">Any price</option><option value="5">Under $5</option><option value="10">Under $10</option><option value="25">Under $25</option><option value="50">Under $50</option><option value="100">Under $100</option></select><select id="sort"><option value="score">Best for Tyler</option><option value="discount">Biggest % off</option><option value="save">Most $ saved</option><option value="price">Cheapest</option></select><button onclick="shareApp()">Share app</button></div>
+<div class="title"><div><h2 id="heading">For Tyler</h2><small id="meta"></small></div></div>
+<section class="grid" id="grid"></section>
+<nav class="bottom"><button onclick="setCat('For Tyler')">✦<br>Tyler</button><button onclick="setCat('Men')">👕<br>Men</button><button onclick="setCat('Home')">⌂<br>Home</button><button onclick="setCat('Kids')">★<br>Kids</button><button onclick="setCat('Saved')">♡<br>Saved</button></nav>
+<div class="sheetBg" id="sheetBg" onclick="if(event.target===this)closeDetail()"><div class="sheet"><button class="close" onclick="closeDetail()">×</button><div class="detail" id="detail"></div></div></div>
+<script src="seed.js"></script>
+<script src="app.js"></script>
+</body></html>
