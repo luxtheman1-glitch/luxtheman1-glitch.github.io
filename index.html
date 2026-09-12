@@ -6,10 +6,28 @@
 <meta name="theme-color" content="#0d0d12">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://luxtheman1-glitch.github.io/">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="LUX Clearance">
-<title>LUX//CLEARANCE — Mobile</title>
+<meta property="og:title" content="LUX//CLEARANCE">
+<meta property="og:site_name" content="LUX//CLEARANCE">
+<meta property="og:url" content="https://luxtheman1-glitch.github.io/">
+<meta name="twitter:title" content="LUX//CLEARANCE">
+<title>LUX//CLEARANCE</title>
+<script>
+(function(){
+  var u=new URL(window.location.href), changed=false;
+  Array.from(u.searchParams.keys()).forEach(function(k){
+    if(k.indexOf('utm_')===0 || k==='ref' || k==='source') { u.searchParams.delete(k); changed=true; }
+  });
+  if(changed){
+    var clean=u.pathname+(u.searchParams.toString()?'?'+u.searchParams.toString():'')+u.hash;
+    history.replaceState(null,'LUX//CLEARANCE',clean);
+  }
+  window.LUX_CLEARANCE_URL=window.location.origin+window.location.pathname;
+})();
+</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -24,4 +42,13 @@
 <div class="sheetBg" id="sheetBg" onclick="if(event.target===this)closeDetail()"><div class="sheet"><button class="close" onclick="closeDetail()">×</button><div class="detail" id="detail"></div></div></div>
 <script src="seed.js"></script>
 <script src="app.js"></script>
+<script>
+window.shareApp=function(){
+  var url=window.LUX_CLEARANCE_URL || 'https://luxtheman1-glitch.github.io/';
+  var data={title:'LUX//CLEARANCE',text:'LUX//CLEARANCE — live Walmart clearance deals',url:url};
+  if(navigator.share){navigator.share(data).catch(function(){});}
+  else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){alert('LUX//CLEARANCE link copied');});}
+  else {prompt('Copy the LUX//CLEARANCE link:',url);}
+};
+</script>
 </body></html>
