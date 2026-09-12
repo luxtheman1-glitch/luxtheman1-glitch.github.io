@@ -1,0 +1,11 @@
+{
+  "name": "LUX//CLEARANCE Personal",
+  "short_name": "LUX Clearance",
+  "description": "A personal Walmart deep-clearance browser with men-first recommendations.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f1ee",
+  "theme_color": "#0d0d12",
+  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
