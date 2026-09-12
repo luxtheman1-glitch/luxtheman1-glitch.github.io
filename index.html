@@ -16,19 +16,14 @@
 <meta name="twitter:title" content="LUX//CLEARANCE">
 <title>LUX//CLEARANCE</title>
 <script>
-(function(){
-  var u=new URL(window.location.href), changed=false;
-  Array.from(u.searchParams.keys()).forEach(function(k){if(k.indexOf('utm_')===0||k==='ref'||k==='source'){u.searchParams.delete(k);changed=true;}});
-  if(changed){var clean=u.pathname+(u.searchParams.toString()?'?'+u.searchParams.toString():'')+u.hash;history.replaceState(null,'LUX//CLEARANCE',clean);}
-  window.LUX_CLEARANCE_URL=window.location.origin+window.location.pathname;
-})();
+(function(){var u=new URL(window.location.href),changed=false;Array.from(u.searchParams.keys()).forEach(function(k){if(k.indexOf('utm_')===0||k==='ref'||k==='source'){u.searchParams.delete(k);changed=true;}});if(changed){var clean=u.pathname+(u.searchParams.toString()?'?'+u.searchParams.toString():'')+u.hash;history.replaceState(null,'LUX//CLEARANCE',clean);}window.LUX_CLEARANCE_URL=window.location.origin+window.location.pathname;})();
 </script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="top"><div class="head"><div class="logo">LUX<i>//</i>CLEARANCE</div><div class="search"><input id="q" placeholder="Search deals…"><button>⌕</button></div></div></div>
-<section class="hero"><div class="k">Tyler-first family clearance</div><h1>MEN FIRST.<br>DEALS EVERYWHERE.</h1><p>Live Walmart clearance. Only products that are currently in stock and sold by Walmart are allowed into the feed.</p><div class="stats"><div class="stat"><b id="total">0</b><span>live deals</span></div><div class="stat"><b id="menN">0</b><span>men's</span></div><div class="stat"><b id="savedN">0</b><span>saved</span></div></div></section>
-<div class="scanbar"><div><b id="scanTitle">LIVE · starting…</b><small id="scanText">Opening Walmart clearance now. The feed updates as products pass in-stock + sold-by-Walmart verification.</small></div><button onclick="scanNow()">↻ Rescan</button></div>
+<section class="hero"><div class="k">Tyler-first family clearance</div><h1>MEN FIRST.<br>DEALS EVERYWHERE.</h1><p>Verified Walmart clearance feed. Only products marked in stock and sold by Walmart are published.</p><div class="stats"><div class="stat"><b id="total">0</b><span>live deals</span></div><div class="stat"><b id="menN">0</b><span>men's</span></div><div class="stat"><b id="savedN">0</b><span>saved</span></div></div></section>
+<div class="scanbar"><div><b id="scanTitle">Loading live feed…</b><small id="scanText">The catalog loads automatically when opened. GitHub rescans Walmart every 15 minutes; this page checks for a newer feed every minute.</small></div><button onclick="scanNow()">↻ Refresh feed</button></div>
 <div class="chips" id="chips"></div>
 <div class="controls"><select id="max"><option value="99999">Any price</option><option value="5">Under $5</option><option value="10">Under $10</option><option value="25">Under $25</option><option value="50">Under $50</option><option value="100">Under $100</option></select><select id="sort"><option value="score">Best for Tyler</option><option value="discount">Biggest % off</option><option value="save">Most $ saved</option><option value="price">Cheapest</option></select><button onclick="shareApp()">Share app</button></div>
 <div class="title"><div><h2 id="heading">For Tyler</h2><small id="meta"></small></div></div>
@@ -37,12 +32,8 @@
 <div class="sheetBg" id="sheetBg" onclick="if(event.target===this)closeDetail()"><div class="sheet"><button class="close" onclick="closeDetail()">×</button><div class="detail" id="detail"></div></div></div>
 <script src="seed.js"></script>
 <script src="app.js"></script>
-<script src="scanner-v2.js?v=2"></script>
+<script src="feed.js?v=3"></script>
 <script>
-window.shareApp=function(){
-  var url=window.LUX_CLEARANCE_URL||'https://luxtheman1-glitch.github.io/';
-  var data={title:'LUX//CLEARANCE',text:'LUX//CLEARANCE — live Walmart clearance deals',url:url};
-  if(navigator.share){navigator.share(data).catch(function(){});}else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){alert('LUX//CLEARANCE link copied');});}else{prompt('Copy the LUX//CLEARANCE link:',url);}
-};
+window.shareApp=function(){var url=window.LUX_CLEARANCE_URL||'https://luxtheman1-glitch.github.io/';var data={title:'LUX//CLEARANCE',text:'LUX//CLEARANCE — verified Walmart clearance deals',url:url};if(navigator.share){navigator.share(data).catch(function(){});}else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){alert('LUX//CLEARANCE link copied');});}else{prompt('Copy the LUX//CLEARANCE link:',url);}};
 </script>
 </body></html>
