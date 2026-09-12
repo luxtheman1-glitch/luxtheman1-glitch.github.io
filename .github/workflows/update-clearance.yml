@@ -1,0 +1,44 @@
+name: Update Walmart Clearance Feed
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/15 * * * *'
+  push:
+    paths:
+      - 'scripts/scan_walmart.py'
+      - '.github/workflows/update-clearance.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: walmart-clearance-scan
+  cancel-in-progress: true
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install scanner dependency
+        run: pip install requests
+      - name: Scan Walmart clearance
+        run: python scripts/scan_walmart.py
+      - name: Publish feed
+        run: |
+          if git diff --quiet -- deals.json; then
+            echo "No feed changes"
+            exit 0
+          fi
+          git config user.name "LUX Clearance Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add deals.json
+          git commit -m "Update live Walmart clearance feed"
+          git push
