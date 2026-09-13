@@ -21,7 +21,7 @@
 <script>
 (function(){var u=new URL(window.location.href),changed=false;Array.from(u.searchParams.keys()).forEach(function(k){if(k.indexOf('utm_')===0||k==='ref'||k==='source'){u.searchParams.delete(k);changed=true;}});if(changed){var clean=u.pathname+(u.searchParams.toString()?'?'+u.searchParams.toString():'')+u.hash;history.replaceState(null,'LUX//CLEARANCE',clean);}window.LUX_CLEARANCE_URL=window.location.origin+window.location.pathname;})();
 </script>
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=4.1">
 </head>
 <body>
 <div class="utility"><span class="liveDot"></span><b>LIVE CLEARANCE</b><span>In stock only</span><span>Sold by Walmart only</span></div>
@@ -89,10 +89,10 @@
 </nav>
 
 <div class="sheetBg" id="sheetBg" onclick="if(event.target===this)closeDetail()"><div class="sheet"><button class="close" onclick="closeDetail()">×</button><div class="detail" id="detail"></div></div></div>
-<script src="app.js?v=4"></script>
-<script src="feed.js?v=4"></script>
+<script src="app.js?v=4.1"></script>
+<script src="feed.js?v=4.1"></script>
 <script>
 window.shareApp=function(){var url=window.LUX_CLEARANCE_URL||'https://luxtheman1-glitch.github.io/';var data={title:'LUX//CLEARANCE',text:'LUX//CLEARANCE — live Walmart clearance, in stock and sold by Walmart.',url:url};if(navigator.share){navigator.share(data).catch(function(){});}else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){alert('LUX//CLEARANCE link copied');});}else{prompt('Copy the LUX//CLEARANCE link:',url);}};
-if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js?v=4').catch(function(){});});}
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js?v=4.1').catch(function(){});});}
 </script>
 </body></html>
